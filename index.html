@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Charlie Morga — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #FAFAF7;
+    --paper-dim: #F2F1EC;
+    --ink: #1A1D1E;
+    --ink-soft: #6B6F72;
+    --line: #DAD8D2;
+    --accent: #2451B3;
+    --accent-soft: #E7EDF9;
+  }
+
+  *{ box-sizing: border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior: smooth; }
+
+  body{
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a{ color: inherit; text-decoration: none; }
+
+  .wrap{
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position: sticky;
+    top: 0;
+    background: rgba(250,250,247,0.88);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+    z-index: 10;
+  }
+  .nav-inner{
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav-mark{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+  }
+  .nav-links{
+    display: flex;
+    gap: 24px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.03em;
+  }
+  .nav-links a{
+    color: var(--ink-soft);
+    transition: color 0.15s ease;
+  }
+  .nav-links a:hover, .nav-links a:focus-visible{ color: var(--ink); }
+
+  /* ---------- HERO ---------- */
+  section.hero{
+    padding: 96px 0 72px;
+  }
+  .eyebrow{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  h1.name{
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(40px, 7vw, 64px);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 20px;
+  }
+  p.pitch{
+    font-size: 19px;
+    color: var(--ink-soft);
+    max-width: 52ch;
+    margin-bottom: 32px;
+  }
+  .hero-actions{
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .btn{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    padding: 12px 20px;
+    border: 1px solid var(--ink);
+    border-radius: 2px;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .btn.primary{
+    background: var(--ink);
+    color: var(--paper);
+  }
+  .btn.primary:hover{ background: var(--accent); border-color: var(--accent); }
+  .btn.ghost:hover{ background: var(--ink); color: var(--paper); }
+
+  /* ---------- SECTION HEADERS ---------- */
+  h2.section-title{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 36px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h2.section-title::after{
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  section{ padding: 64px 0; border-top: 1px solid var(--line); }
+  section:first-of-type{ border-top: none; }
+
+  /* ---------- ABOUT ---------- */
+  .about p{
+    max-width: 62ch;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+    font-size: 16.5px;
+  }
+  .about p:last-child{ margin-bottom: 0; }
+  .about strong{ color: var(--ink); font-weight: 600; }
+
+  /* ---------- WORK (timeline spine) ---------- */
+  .work-list{
+    position: relative;
+    padding-left: 28px;
+  }
+  .work-list::before{
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: var(--line);
+  }
+  .work-item{
+    position: relative;
+    padding-bottom: 44px;
+  }
+  .work-item:last-child{ padding-bottom: 0; }
+  .work-item::before{
+    content: '';
+    position: absolute;
+    left: -28px;
+    top: 6px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 2px solid var(--accent);
+  }
+  .work-meta{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+  }
+  h3.work-title{
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 23px;
+    margin-bottom: 8px;
+  }
+  .work-role{
+    font-size: 14.5px;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .work-desc{
+    color: var(--ink-soft);
+    font-size: 15.5px;
+    max-width: 58ch;
+    margin-bottom: 12px;
+  }
+  .work-tags{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .tag{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    padding: 4px 9px;
+    background: var(--paper-dim);
+    border-radius: 2px;
+    color: var(--ink-soft);
+  }
+  .work-link{
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    border-bottom: 1px solid var(--ink);
+  }
+  .work-link:hover{ color: var(--accent); border-color: var(--accent); }
+
+  /* ---------- SKILLS ---------- */
+  .skills-groups{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .skill-group h4{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  .skill-group ul{ list-style: none; }
+  .skill-group li{
+    font-size: 15px;
+    color: var(--ink-soft);
+    padding: 6px 0;
+    border-bottom: 1px solid var(--paper-dim);
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact-inner{ text-align: left; }
+  h2.contact-headline{
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(30px, 5vw, 42px);
+    margin-bottom: 20px;
+    max-width: 16ch;
+  }
+  .contact-email{
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 500;
+    padding-bottom: 4px;
+    border-bottom: 2px solid var(--ink);
+    margin-bottom: 28px;
+  }
+  .contact-email:hover{ color: var(--accent); border-color: var(--accent); }
+  .contact-links{
+    display: flex;
+    gap: 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--ink-soft);
+  }
+  .contact-links a:hover{ color: var(--ink); }
+
+  footer{
+    padding: 32px;
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- CASE STUDY / PROCESS ---------- */
+  .process-steps{
+    display: flex;
+    align-items: stretch;
+    gap: 4px;
+    margin-bottom: 44px;
+  }
+  .process-step{
+    flex: 1;
+    background: var(--paper-dim);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 22px 20px;
+  }
+  .process-step--accent{
+    background: var(--accent-soft);
+  }
+  .process-num{
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 26px;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .process-step h4{
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .process-step p{
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .process-arrow{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ink-soft);
+    font-size: 20px;
+    padding: 0 2px;
+    flex-shrink: 0;
+  }
+  .process-fields-title{
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .process-field-list{
+    display: flex;
+    flex-direction: column;
+  }
+  .process-field{
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--paper-dim);
+  }
+  .process-field:last-child{ border-bottom: none; }
+  .process-field-n{
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--paper);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+  }
+  .process-field div{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .process-field strong{
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .process-field span{
+    font-size: 13.5px;
+    color: var(--ink-soft);
+  }
+
+  @media (max-width: 640px){
+    .process-steps{ flex-direction: column; }
+    .process-arrow{ transform: rotate(90deg); padding: 4px 0; }
+  }
+
+  @media (max-width: 560px){
+    .nav-links{ display: none; }
+    .skills-groups{ grid-template-columns: 1fr; }
+    section.hero{ padding-top: 64px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior: auto; }
+    *{ transition: none !important; }
+  }
+
+  :focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <span class="nav-mark">CM / 2026</span>
+    <nav class="nav-links">
+      <a href="#work">Experience</a>
+      <a href="#achievements">Achievements</a>
+      <a href="#case-study">Case Study</a>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section class="hero">
+    <div class="eyebrow">Available for new roles</div>
+    <h1 class="name">Charlie Morga</h1>
+    <p class="pitch">
+      Warranty Administrator and Customer Support Specialist with 5+ years across BPO and technical service operations. Skilled in Salesforce, SAP, and high-volume claims and support workflows. Based in the Philippines.
+    </p>
+    <div class="hero-actions">
+      <a class="btn primary" href="#work">See the experience</a>
+      <a class="btn ghost" href="mailto:charliemorga2022@gmail.com">Get in touch</a>
+      <a class="btn ghost" href="Charlie_Morga_Resume.pdf" download>Download resume</a>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2 class="section-title">About</h2>
+    <div class="about">
+      <p>
+        <strong>I keep high-volume operations running accurately and on time.</strong> Over the past five years I've administered warranty claims for retail partners across Australia and New Zealand, managed cases end-to-end in Salesforce, and tracked tools through service centers using SAP — all while meeting strict service-level agreements.
+      </p>
+      <p>
+        Before that, I spent years in direct customer-facing roles: real-time chat support, technical troubleshooting, and sales for a U.S. telecom provider, plus data entry and reporting for U.S.-based client accounts. I hold a BS in Information Technology and I'm looking for a role where that mix of technical fluency and customer-facing discipline is valued.
+      </p>
+    </div>
+  </section>
+
+  <section id="work">
+    <h2 class="section-title">Experience</h2>
+    <div class="work-list">
+
+      <div class="work-item">
+        <div class="work-meta">Aug 2020 — Dec 2025</div>
+        <h3 class="work-title">Techtronic Industries Australia</h3>
+        <div class="work-role">Warranty Administrator / Case Management</div>
+        <p class="work-desc">
+          Administered and validated warranty claims in Salesforce for retail partners across Australia and New Zealand. Managed cases end-to-end, processed freight bookings, and tracked tools through internal service centers using SAP. Prepared monthly reports on aged, pending, and completed claims, and kept documentation current with factory recalls and business announcements.
+        </p>
+        <div class="work-tags">
+          <span class="tag">Salesforce</span>
+          <span class="tag">SAP</span>
+          <span class="tag">Claim Tracking</span>
+          <span class="tag">Report Generation</span>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-meta">Jun 2017 — Aug 2020</div>
+        <h3 class="work-title">Frontier Communications</h3>
+        <div class="work-role">Chat Support Agent / Sales Representative</div>
+        <p class="work-desc">
+          Provided real-time chat support for billing, technical, and account concerns, and assisted customers with service modifications and troubleshooting. Promoted bundled services, upgrades, and add-on security products while managing 3–4 concurrent chat sessions against performance and CSAT targets. Recognized four times with a Certificate of Excellence, including Top 2 Agent for Issue Resolution.
+        </p>
+        <div class="work-tags">
+          <span class="tag">Chat Support</span>
+          <span class="tag">Technical Troubleshooting</span>
+          <span class="tag">Sales</span>
+        </div>
+      </div>
+
+      <div class="work-item">
+        <div class="work-meta">Sep 2012 — Jul 2013</div>
+        <h3 class="work-title">Customer Service Associate — Data Entry</h3>
+        <div class="work-role">U.S.-based client accounts</div>
+        <p class="work-desc">
+          Entered receivables and account data with high accuracy, scanned and validated statements of accounts for documentation, and delivered weekly reports while supporting data cleansing efforts.
+        </p>
+        <div class="work-tags">
+          <span class="tag">Data Entry</span>
+          <span class="tag">Data Validation</span>
+          <span class="tag">Reporting</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="achievements">
+    <h2 class="section-title">Achievements</h2>
+    <div class="skills-groups" style="grid-template-columns: 1fr 1fr;">
+      <div class="skill-group">
+        <h4>Frontier Communications — Sykes</h4>
+        <ul>
+          <li>Top 10% Overall Agent — May 2019</li>
+          <li>Top 10% Overall Agent — June 2019</li>
+          <li>Top 10% Overall Agent — December 2018</li>
+          <li>Top 2 Agent, Issue Resolution — March 2018</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="case-study">
+    <h2 class="section-title">Case study — Warranty claim process</h2>
+    <p class="work-desc" style="max-width:62ch; margin-bottom:32px;">
+      How a retailer-raised warranty case moves through Salesforce, from submission to approval.
+    </p>
+
+    <div class="process-steps">
+      <div class="process-step">
+        <div class="process-num">01</div>
+        <h4>Case Raised</h4>
+        <p>Retailer submits a warranty claim in Salesforce, creating a new Case record. A receipt must be attached to the case.</p>
+      </div>
+      <div class="process-arrow">→</div>
+      <div class="process-step">
+        <div class="process-num">02</div>
+        <h4>Review Claim Info</h4>
+        <p>Verify account name, purchase date, model &amp; serial number, and customer name.</p>
+      </div>
+      <div class="process-arrow">→</div>
+      <div class="process-step process-step--accent">
+        <div class="process-num">03</div>
+        <h4>Approval</h4>
+        <p>Claim is approved (or returned for correction) and the record is updated.</p>
+      </div>
+    </div>
+
+    <div class="process-fields">
+      <h4 class="process-fields-title">Fields checked in step 02</h4>
+      <div class="process-field-list">
+        <div class="process-field"><span class="process-field-n">1</span><div><strong>Receipt Attached</strong><span>Confirms proof of purchase is present before the claim proceeds</span></div></div>
+        <div class="process-field"><span class="process-field-n">2</span><div><strong>Account Name</strong><span>Confirms the retail partner submitting the claim</span></div></div>
+        <div class="process-field"><span class="process-field-n">3</span><div><strong>Date of Purchase</strong><span>Verifies the tool is still within its warranty window</span></div></div>
+        <div class="process-field"><span class="process-field-n">4</span><div><strong>Model Number</strong><span>Identifies the exact product covered by the claim</span></div></div>
+        <div class="process-field"><span class="process-field-n">5</span><div><strong>Serial Number</strong><span>Matches the unit to manufacturing and recall records</span></div></div>
+        <div class="process-field"><span class="process-field-n">6</span><div><strong>Customer Name</strong><span>Ties the claim to the end user for follow-up</span></div></div>
+      </div>
+    </div>
+
+    <a class="btn ghost" href="warranty_claim_process.pptx" download style="display:inline-block; margin-top:28px;">Download full presentation (.pptx)</a>
+  </section>
+
+  <section id="skills">
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-groups">
+      <div class="skill-group">
+        <h4>Core</h4>
+        <ul>
+          <li>Warranty Administration</li>
+          <li>Customer Support (Email & Chat)</li>
+          <li>Claim & Order Tracking</li>
+          <li>Data Entry & Validation</li>
+          <li>Escalation Handling</li>
+          <li>Process Improvement</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h4>Tools & Platforms</h4>
+        <ul>
+          <li>Salesforce CRM</li>
+          <li>SAP ERP</li>
+          <li>Microsoft Office (Word, Excel, Outlook)</li>
+          <li>Google Workspace</li>
+          <li>Slack, Zoom, Microsoft Teams</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <h2 class="section-title">Education</h2>
+    <div class="work-item" style="padding-bottom:0;">
+      <h3 class="work-title" style="font-size:20px;">Bachelor of Science in Information Technology</h3>
+      <div class="work-meta">2010 — 2012</div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact-inner">
+      <h2 class="contact-headline">Let's work together.</h2>
+      <a class="contact-email" href="mailto:charliemorga2022@gmail.com">charliemorga2022@gmail.com</a>
+      <div class="contact-links">
+        <a href="tel:+639958420397">+63 995 842 0397</a>
+        <a href="https://linkedin.com/in/charlie-morga-248743190" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="Charlie_Morga_Resume.pdf" download>Resume (PDF)</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>Built with care — © 2026 Charlie Morga</footer>
+
+</body>
+</html>
